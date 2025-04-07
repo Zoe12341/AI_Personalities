@@ -1,4 +1,5 @@
 #Python file for randomizing character traits
+#Zoe Branch
 import random 
 import csv
 
@@ -23,7 +24,7 @@ def get_traits():
 with open('personality_data.csv', 'w', newline='') as file:
     # Create a CSV writer object
     writer = csv.writer(file)
-    
+
     # Write the data to the CSV file
     writer.writerows(data)
 
