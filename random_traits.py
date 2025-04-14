@@ -4,7 +4,7 @@ import random
 import csv
 
 data = [
-    ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism']
+    ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism', "prompt"]
 ]
 def get_traits():
     extraversion_options = ["extroverted", "introverted"]
