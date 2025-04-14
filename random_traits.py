@@ -33,7 +33,7 @@ print("CSV file 'personality_data.csv' created successfully.")
 
 for i in range(20):
     extraversion, agreeableness, openness, conscientiousness, neuroticismm = get_traits()
-    prompt = "Tell a story in 3 paragraphs or less about a person who is " + openness + ", " + conscientiousness + ", " + neuroticismm + ", " + agreeableness + ", " + extraversion + ". Do not use the words " + extraversion + ", " + agreeableness + ", " + openness + ", " + conscientiousness + "or, " + neuroticismm
+    prompt = "Tell a story in 3 paragraphs or less about a person who is " + openness + ", " + conscientiousness + ", " + neuroticismm + ", " + agreeableness + ", " + extraversion + ". Do not use the words " + extraversion + ", " + agreeableness + ", " + openness + ", " + conscientiousness + " or, " + neuroticismm
 
     row_data = [extraversion, agreeableness, openness, conscientiousness, neuroticismm, prompt]
     try:
