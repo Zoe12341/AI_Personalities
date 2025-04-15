@@ -2,8 +2,7 @@ import csv
 import os
 import pandas as pd
 
-#from openai import OpenAI ChatCompletion
-#import openai
+
 from dotenv import load_dotenv
 from openai import OpenAI
 client = OpenAI()
@@ -15,10 +14,13 @@ api_key = os.getenv("API_KEY")
 df = pd.read_csv('personality_data.csv')
 prompts = df.prompt
 
-df['OpenAI_response'] = None #Add a column with n/a for all rows
+#df["OpenAI_response"] = None  #Add a column with n/a for all rows
+#df.insert(1, 'OpenAI_response', 'n/a')
 
-""" for prompt in prompts:
-    i = 0
+output = []
+
+
+for prompt in prompts:
     completion = client.chat.completions.create(
         model="gpt-4.1",
         messages=[
@@ -28,8 +30,16 @@ df['OpenAI_response'] = None #Add a column with n/a for all rows
             }
         ]
     )
-    df.loc[i, 'OpenAI_response'] = completion.choices[0].message.content
-    i +=1 """
+    chat_response = completion.choices[0].message.content
+    output.append(chat_response)
+
+
+print(output)
+df["OpenAI_response"] = output
+
+
+
+df.to_csv('personality_data.csv', index=False)
 
 
 
