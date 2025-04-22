@@ -10,7 +10,7 @@ def get_traits():
     extraversion_options = ["extroverted", "introverted"]
     agreeableness_options = ["agreeable", "disagreeable"]
     openness_options = ["open", "closed off"]
-    conscientiousness_options = ["concientious", "unconscientious"]
+    conscientiousness_options = ["conscientious", "unconscientious"]
     neuroticism_options = ["neurotic", "not neurotic"]
 
     extraversion = random.choice(extraversion_options)

@@ -34,7 +34,7 @@ for prompt in prompts:
     output.append(chat_response)
 
 
-print(output)
+#print(output)
 df["OpenAI_response"] = output
 
 
