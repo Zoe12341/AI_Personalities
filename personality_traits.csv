@@ -1,0 +1,21 @@
+extraversion,agreeableness,openness,conscientiousness,neuroticism,Follows_Prompt,extraversion_gpt_grade,agreeableness_gpt_grade,openness_gpt_grade,conscientiousness_gpt_grade,neuroticism_gpt_grade
+introverted,agreeable,closed off,unconscientious,neurotic,False,Introverted,agreeable,closed off,unconscientious,neurotic
+introverted,disagreeable,closed off,unconscientious,neurotic,True,Introverted,disagreeable,closed off,unconscientious,neurotic
+introverted,agreeable,closed off,conscientious,not neurotic,True,Introverted,agreeable,closed off,conscientious,unneurotic
+extroverted,agreeable,open,unconscientious,neurotic,True,Extroverted,agreeable,open,unconscientious,neurotic
+extroverted,agreeable,closed off,conscientious,not neurotic,True,Extroverted,agreeable,conscientious,closed off,unneurotic
+extroverted,disagreeable,open,conscientious,not neurotic,True,Extroverted,disagreeable,open,conscientious,unneurotic
+introverted,disagreeable,closed off,conscientious,neurotic,True,Introverted,disagreeable,closed off,conscientious,neurotic
+extroverted,agreeable,open,conscientious,neurotic,True,Extroverted,agreeable,open,conscientious,neurotic
+introverted,disagreeable,closed off,unconscientious,not neurotic,True,Introverted,disagreeable,open,unconscientious,unneurotic
+introverted,disagreeable,open,conscientious,not neurotic,True,Introverted,agreeable,open,conscientious,unneurotic
+introverted,agreeable,closed off,unconscientious,not neurotic,True,Introverted,agreeable,closed off,unconscientious,unneurotic
+introverted,disagreeable,open,unconscientious,neurotic,True,Introverted,disagreeable,open,unconscientious,neurotic
+introverted,disagreeable,open,conscientious,neurotic,True,Introverted,disagreeable,open,conscientious,neurotic
+extroverted,disagreeable,open,conscientious,neurotic,True,Extroverted,disagreeable,open,conscientious,neurotic
+extroverted,disagreeable,closed off,conscientious,not neurotic,True,Extroverted,disagreeable,closed off,conscientious,unneurotic
+extroverted,agreeable,open,unconscientious,neurotic,True,Extroverted,agreeable,open,unconscientious,neurotic
+extroverted,agreeable,open,unconscientious,not neurotic,True,Extroverted,agreeable,open,unconscientious,unneurotic
+extroverted,agreeable,open,unconscientious,neurotic,True,Extroverted,agreeable,open,unconscientious,neurotic
+introverted,disagreeable,open,unconscientious,not neurotic,True,Introverted,disagreeable,open,unconscientious,unneurotic
+introverted,disagreeable,closed off,unconscientious,neurotic,False,Introverted,disagreeable,closed off,unconscientious,neurotic
