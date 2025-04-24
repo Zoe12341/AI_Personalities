@@ -1,0 +1,64 @@
+import pandas as pd
+from sklearn.metrics import confusion_matrix
+from sklearn import metrics
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# # Uncomment the following lines to load the CSV file and create a new one with just personality traits
+# # This will create the personality_traits.csv file already included in the repo
+
+# # Load the CSV file
+# df = pd.read_csv('personality_data.csv')
+# # Split the 'OpenAI_grade' column into five separate columns
+# df[['extraversion_gpt_grade', 'agreeableness_gpt_grade', 'openness_gpt_grade', 'conscientiousness_gpt_grade', 'neuroticism_gpt_grade']
+# ] = df['OpenAI_grade'].str.split(', ', expand=True)
+# df['extraversion_gpt_grade'] = df['extraversion_gpt_grade'].str.lower() #change to lowercase
+
+# #drop other columns for readability
+# df.drop('OpenAI_grade', axis=1, inplace=True)
+# df.drop('OpenAI_response', axis=1, inplace=True)
+# df.drop('prompt', axis=1, inplace=True)
+
+# Save the updated CSV file
+# df.to_csv('personality_traits.csv', index=False)
+
+
+def conf_matrix(csv_filepath, trait, positive_label, negative_label):
+    # Load the CSV file
+    df = pd.read_csv(csv_filepath)
+
+    # Map the trait values to binary values
+    df[trait + '_gpt_grade'] = df[trait + '_gpt_grade'].map({positive_label: 1, negative_label: 0})
+    df[trait] = df[trait].map({positive_label: 1, negative_label: 0})
+
+    intended_values = df[trait]
+    predicted_values = df[trait + '_gpt_grade']
+    conf_matrix = confusion_matrix(intended_values, predicted_values)
+
+    # Create a heatmap for visualization
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', 
+                xticklabels=[negative_label, positive_label],
+                yticklabels=[negative_label, positive_label]) 
+                #yticklabels=sorted(actual_values.unique()))
+    plt.xlabel('GPT Predicted Label')
+    plt.ylabel('Intended Label')
+    plt.title(f'Confusion Matrix for {trait.capitalize()}')
+    plt.show()
+
+
+# Uncomment the following lines to run the confusion matrix function for each trait
+
+#conf_matrix('personality_traits.csv', 'extraversion', 'extroverted', 'introverted')
+#conf_matrix('personality_traits.csv', 'agreeableness', 'agreeable', 'disagreeable')
+#conf_matrix('personality_traits.csv', 'openness', 'open', 'closed off')
+#conf_matrix('personality_traits.csv', 'conscientiousness', 'conscientious', 'unconscientious')
+#conf_matrix('personality_traits.csv', 'neuroticism', 'neurotic', 'unneurotic')
+
+
+
+
+
+
+
+

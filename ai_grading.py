@@ -23,7 +23,7 @@ responses = df.OpenAI_response
 def trait_in_response(responses):
     follows_prompt = []
     trait_num = 0
-    explicit_traits = ["extroverted", "introverted", "agreeable", "disagreeable", "open", "closed off", "conscientious", "unconscientious", "neurotic", "not neurotic"]
+    explicit_traits = ["extroverted", "introverted", "agreeable", "disagreeable", "open", "closed off", "conscientious", "unconscientious", "neurotic", "unneurotic"]
     for response in responses:
         for trait in explicit_traits:
             if trait in response:
