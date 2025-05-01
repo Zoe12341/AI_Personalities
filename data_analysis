@@ -56,9 +56,118 @@ def conf_matrix(csv_filepath, trait, positive_label, negative_label):
 #conf_matrix('personality_traits.csv', 'neuroticism', 'neurotic', 'unneurotic')
 
 
+df = pd.read_csv('combined_df.csv')
+
+def trait_string_to_dict(s):
+    traits = s.lower().replace(' ', '').split(',')
+    return {
+        'extraversion': traits[0],
+        'agreeableness': traits[1],
+        'openness': traits[2],
+        'conscientiousness': traits[3],
+        'neuroticism': traits[4]
+    }
+
+
+for col in ['OpenAI_grade', 'deepseek_chat_grade', 'deepseek_reason_grade', 'OpenAI_grade_na', 'deepseek_chat_grade_na', 'deepseek_reason_grade_na']:
+    df[col + '_parsed'] = df[col].apply(trait_string_to_dict)
+
+trait_names = ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism']
+guess_cols = ['OpenAI_grade_parsed', 'deepseek_chat_grade_parsed', 'deepseek_reason_grade_parsed']
+
+
+# # Uncomment the following lines to compare the accuracy of models
+def compare_to_chat_gpt(guess_cols):
+    trait_names = ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism']
+    accuracy_data = {guess: [] for guess in guess_cols}
+
+    for trait in trait_names:
+        for guess_col in guess_cols:
+            correct = df[trait].str.lower().str.replace(' ', '')
+            predicted = df[guess_col].apply(lambda d: d[trait])
+            accuracy = (correct == predicted).mean()
+            accuracy_data[guess_col].append(accuracy)
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    x = np.arange(len(trait_names))
+    width = 0.3
+
+    fig, ax = plt.subplots()
+    for i, (guess_col, accs) in enumerate(accuracy_data.items()):
+        ax.bar(x + i*width, accs, width, label=guess_col.replace('_parsed', ''))
+
+    ax.set_ylabel('Accuracy')
+    ax.set_title('Trait Guess Accuracy')
+    ax.set_xticks(x + width)
+    ax.set_xticklabels([t.capitalize() for t in trait_names])
+    ax.legend()
+
+    plt.ylim(0, 1)
+    plt.show()
+
+
+#Comparing to human results
+def compare_to_human(guess_cols):
+    trait_names = ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism']
+    accuracy_data = {guess: [] for guess in guess_cols}
+
+    for trait in trait_names:
+        for guess_col in guess_cols:
+            correct = df[trait + "_mode"].str.lower().str.replace(' ', '')
+            predicted = df[guess_col].apply(lambda d: d[trait])
+            accuracy = (correct == predicted).mean()
+            accuracy_data[guess_col].append(accuracy)
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    x = np.arange(len(trait_names))
+    width = 0.3
+
+    fig, ax = plt.subplots()
+    for i, (guess_col, accs) in enumerate(accuracy_data.items()):
+        ax.bar(x + i*width, accs, width, label=guess_col.replace('_parsed', ''))
+
+    ax.set_ylabel('Human Guess')
+    ax.set_title('Trait Guesses vs Human Guesses')
+    ax.set_xticks(x + width)
+    ax.set_xticklabels([t.capitalize() for t in trait_names])
+    ax.legend()
+
+    plt.ylim(0, 1)
+    plt.show()
 
 
 
+def conf_matrix_human(csv_filepath, trait, positive_label, negative_label):
+    # Load the CSV file
+    df = pd.read_csv(csv_filepath)
 
+    # Map the trait values to binary values
+    df[trait + '_mode'] = df[trait + '_mode'].map({positive_label: 1, negative_label: 0})
+    df[trait] = df[trait].map({positive_label: 1, negative_label: 0})
 
+    intended_values = df[trait]
+    predicted_values = df[trait + '_mode']
+    conf_matrix = confusion_matrix(intended_values, predicted_values)
 
+    # Create a heatmap for visualization
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', 
+                xticklabels=[negative_label, positive_label],
+                yticklabels=[negative_label, positive_label]) 
+                #yticklabels=sorted(actual_values.unique()))
+    plt.xlabel('Human Predicted Label')
+    plt.ylabel('Intended Label')
+    plt.title(f'Confusion Matrix for {trait.capitalize()}')
+    plt.show()
+
+#compare_to_human(['OpenAI_grade_na_parsed', 'deepseek_chat_grade_na_parsed', 'deepseek_reason_grade_na_parsed'])
+
+# conf_matrix_human('combined_df.csv', 'extraversion', 'extroverted', 'introverted')
+# conf_matrix_human('combined_df.csv', 'agreeableness', 'agreeable', 'disagreeable')
+# conf_matrix_human('combined_df.csv', 'openness', 'open', 'closed off')
+# conf_matrix_human('combined_df.csv', 'conscientiousness', 'conscientious', 'unconscientious')
+conf_matrix_human('combined_df.csv', 'neuroticism', 'neurotic', 'unneurotic')
