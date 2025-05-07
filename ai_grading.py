@@ -1,4 +1,5 @@
-# Chat gpt judges personality traits represented
+# File to feed generated stories from personality_data.csv to Chat GPT and have chat GPT list the represented personality traits
+
 #load packages
 import csv
 import os
@@ -41,7 +42,7 @@ def trait_in_response(responses):
 # df.to_csv('personality_data.csv', index=False)
 
 
-# # After checking feed responses to Chat GPT for judging
+# # After checking feeds responses to Chat GPT for judging
 output = []
 
 for response in responses:

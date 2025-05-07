@@ -1,4 +1,4 @@
-#file allows for grading of traits to include a "none" option compared to the original grading in ai_grading.py
+# file allows for ChatGPT grading of traits to include a "none" option compared to the original grading in ai_grading.py
 
 
 #load packages
@@ -42,5 +42,5 @@ for response in responses:
     output.append(chat_response)
 
 
-df["OpenAI_grade"] = output
+df["OpenAI_grade_na"] = output
 df.to_csv('personality_data_with_na.csv', index=False)

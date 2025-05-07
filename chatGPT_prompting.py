@@ -1,3 +1,6 @@
+# File that feeds randomly generated traits from personality_data.csv 
+# to Chat GPT and have chat GPT generate a story about a character containing those traits
+
 import csv
 import os
 import pandas as pd

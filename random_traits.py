@@ -1,5 +1,5 @@
-#Python file for randomizing character traits
-#Zoe Branch
+#Python file for randomizing character traits and storing them in personality_data.csv
+
 import random 
 import csv
 

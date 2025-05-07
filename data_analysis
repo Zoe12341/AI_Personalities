@@ -1,3 +1,6 @@
+# This file is used to analyze the results of personality trait predictions made by different models and compare them to both human predictions and the intended traits. 
+# Used combined_df.csv, which is a combination of the personality_data.csv and the results of the AI grading.
+
 import pandas as pd
 from sklearn.metrics import confusion_matrix
 from sklearn import metrics
@@ -22,7 +25,7 @@ import seaborn as sns
 # Save the updated CSV file
 # df.to_csv('personality_traits.csv', index=False)
 
-
+# Function to make a confusion matrix between chatgpt predicting and intended values
 def conf_matrix(csv_filepath, trait, positive_label, negative_label):
     # Load the CSV file
     df = pd.read_csv(csv_filepath)
@@ -76,7 +79,7 @@ trait_names = ['extraversion', 'agreeableness', 'openness', 'conscientiousness',
 guess_cols = ['OpenAI_grade_parsed', 'deepseek_chat_grade_parsed', 'deepseek_reason_grade_parsed']
 
 
-# # Uncomment the following lines to compare the accuracy of models
+# Compare the accuracy of models in guessing the intended traits
 def compare_to_chat_gpt(guess_cols):
     trait_names = ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism']
     accuracy_data = {guess: [] for guess in guess_cols}
@@ -108,7 +111,7 @@ def compare_to_chat_gpt(guess_cols):
     plt.show()
 
 
-#Comparing to human results
+#Comparing models predictions to human results
 def compare_to_human(guess_cols):
     trait_names = ['extraversion', 'agreeableness', 'openness', 'conscientiousness', 'neuroticism']
     accuracy_data = {guess: [] for guess in guess_cols}
@@ -140,7 +143,7 @@ def compare_to_human(guess_cols):
     plt.show()
 
 
-
+# Function to create confusion matrix of intended values vs human predicted values
 def conf_matrix_human(csv_filepath, trait, positive_label, negative_label):
     # Load the CSV file
     df = pd.read_csv(csv_filepath)
@@ -167,7 +170,7 @@ def conf_matrix_human(csv_filepath, trait, positive_label, negative_label):
 #compare_to_human(['OpenAI_grade_na_parsed', 'deepseek_chat_grade_na_parsed', 'deepseek_reason_grade_na_parsed'])
 
 # conf_matrix_human('combined_df.csv', 'extraversion', 'extroverted', 'introverted')
-# conf_matrix_human('combined_df.csv', 'agreeableness', 'agreeable', 'disagreeable')
+#conf_matrix_human('combined_df.csv', 'agreeableness', 'agreeable', 'disagreeable')
 # conf_matrix_human('combined_df.csv', 'openness', 'open', 'closed off')
 # conf_matrix_human('combined_df.csv', 'conscientiousness', 'conscientious', 'unconscientious')
-conf_matrix_human('combined_df.csv', 'neuroticism', 'neurotic', 'unneurotic')
+#conf_matrix_human('combined_df.csv', 'neuroticism', 'neurotic', 'unneurotic')
